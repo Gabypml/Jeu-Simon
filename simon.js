@@ -10,11 +10,13 @@ chaque tour séquence aléatoire -> clignoter les images
 //si on a réussi -> augmnter la séquence de 
 
 const getRandomIntInclusive = (max) =>{
+    //getRandomColor
     const min = 0; 
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
 const blink = (buttonElement)=>{
+    //blink ... 
     buttonElement.style.opacity = 1; 
     let blinkId = (setTimeout(function(){ 
         buttonElement.style.opacity = 0.5; 
@@ -24,22 +26,21 @@ const blink = (buttonElement)=>{
 
 const sequenceExecution = () => {
     opacityDown(); 
-    for(const buttonElement of sequence){
-       blink(buttonElement);
-    }
+    buttonParcour(0);
 };
 
-
 const opacityDown = () => {
-
+    //reset opacity 
     for(const buttonElement of buttons){
         buttonElement.style.opacity = 0.5; 
     }
 };
 
 function buttonParcour(counter){
+    //fonction asynchrone pour parcourir la liste parcours 
     if(counter < sequence.length){
       setTimeout(function(){
+        blink(sequence[counter]);
         counter++;
         console.log(counter);
         buttonParcour(counter);
@@ -47,18 +48,26 @@ function buttonParcour(counter){
     }
 }
 
+//Initialisation
 const buttons = document.getElementsByClassName('button'); 
-const sequence = []; 
-//sequence.push(buttons[0]); 
+const sequence = [], sequenceColor = [];
+let random = getRandomIntInclusive(buttons.length);
 sequence.push(buttons[getRandomIntInclusive(buttons.length)]); 
-sequence.push(buttons[getRandomIntInclusive(buttons.length)]); 
-sequence.push(buttons[getRandomIntInclusive(buttons.length)]); 
-sequence.push(buttons[getRandomIntInclusive(buttons.length)]); 
-
-buttonParcour(0);
-
-
 sequenceExecution();
+console.log(sequence);
 
-//sequence.push(getRandomIntInclusive(buttons[buttons.length])); //on ajoute la première séquence
-//sequenceExecution();
+/*
+    on doit cliquer sur les éléments qui ont clignoté dans l'ordre
+        si on ne réussit pas -> fin du jeu 
+        si on réussit -> 
+            on ajoute un élément à la séquence, 
+            on recommence la boucle 
+*/
+//faire une boucle pour ajouter un event sur tous les boutons 
+for(const buttonElement of buttons){
+    buttonElement.addEventListener('click', (e)=>{
+        console.log(e.target.id);
+    })
+}
+
+
