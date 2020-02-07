@@ -1,0 +1,40 @@
+/*
+    inclusion OK 
+*/
+.boutons{
+    display : grid; 
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3, minmax(300px, 1fr));
+}
+.boutons div{
+    width : 200px; 
+    height : 200px; 
+    border : 1px solid black; 
+    border-radius: 50%;
+}
+.boutons{
+   /* opacity: 0.5;*/
+}
+#red{
+    grid-column-start: 2;
+    grid-row-start: 1;
+    background-color : red;
+}
+
+#blue{
+    grid-column-start: 1;
+    grid-row-start: 2;
+    background-color: blue;
+}
+
+#yellow{
+    grid-column-start: 3;
+    grid-row-start: 2;
+    background-color : yellow;
+}
+
+#green{
+    grid-column-start: 2;
+    grid-row-start: 3;
+    background-color: green;
+}
